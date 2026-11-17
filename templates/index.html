@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Google Maps Lead Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topbar"><h1>📍 Google Maps Lead Generator</h1></header>
+  <main class="container">
+    <section class="card">
+      <form id="search-form" class="form-grid" novalidate>
+        <label>Business Category
+          <input id="category" type="text" placeholder="e.g. Restaurants, Hotels, Schools" required maxlength="80">
+        </label>
+        <label>Location
+          <input id="location" type="text" placeholder="e.g. Lahore, Karachi, Islamabad" required maxlength="80">
+        </label>
+        <label>Max Results
+          <input id="max_results" type="number" min="1" max="{{ max_limit }}" value="20" required>
+        </label>
+        <button id="search-btn" type="submit" class="btn primary">Search</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="toolbar">
+        <div>
+          <strong>Status:</strong> <span id="status" class="status">Ready</span>
+          &nbsp;|&nbsp; <strong>Total found:</strong> <span id="total">0</span>
+        </div>
+        <div class="actions">
+          <button id="csv-btn" class="btn outline" disabled>Download CSV</button>
+          <button id="xlsx-btn" class="btn outline" disabled>Download Excel</button>
+        </div>
+      </div>
+      <div id="loader" class="loader hidden"><div class="spinner"></div><span>Scraping Google Maps… this can take 1-3 minutes</span></div>
+      <div id="error" class="alert hidden"></div>
+      <div id="empty" class="empty">No results yet. Run a search to get started.</div>
+      <div class="table-wrap hidden" id="table-wrap">
+        <table>
+          <thead><tr>
+            <th>#</th><th>Name</th><th>Category</th><th>Address</th><th>Phone</th>
+            <th>Website</th><th>Maps</th><th>Rating</th><th>Reviews</th>
+          </tr></thead>
+          <tbody id="results"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
